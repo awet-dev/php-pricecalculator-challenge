@@ -13,7 +13,8 @@ class GroupLoader extends DatabaseLoader
             $getGroup->execute();
             $groups = $getGroup->fetchAll();
             foreach ($groups as $group) {
-                $this->groups[$group['id']] = new Group((int)$group['id'], (string)$group['name'], (int)$group['parent_id'], (int)$group['fixed_discount'], (int)$group['variable_discount']);
+                $this->groups[$group['id']] = new Group((int)$group['id'], (string)$group['name'], (int)$group['parent_id'], (int)$group['fixed_discount'], (int)$group['variable_discount'], $this);
+                //$grouploader parameter was missing, so we added $this
                 //$this -> pass the Grouploader in the new Group for nesting parents of the group
             }
         }
