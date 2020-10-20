@@ -24,6 +24,10 @@ function whatIsHappening()
 whatIsHappening(); // call function
 
 
+require 'Model/Product.php';
+require 'Model/DatabaseLoader.php';
+
+
 //include all your model files here
 require 'Model/User.php';
 //include all your controllers here
@@ -40,3 +44,4 @@ if(isset($_GET['page']) && $_GET['page'] === 'info') {
 
 
 $controller->render($_GET, $_POST);
+
