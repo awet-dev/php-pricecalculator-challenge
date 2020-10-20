@@ -8,7 +8,8 @@ private array $products = [];
      * ProductLoader constructor.
      * @param array $products
      */
-    public function __construct(array $products){
+    public function __construct(){
+        //removed parameter from construct function
         //$this->products = $products;
 
         $pdo = $this->openConnection();
