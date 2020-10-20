@@ -24,18 +24,20 @@ function whatIsHappening()
 whatIsHappening(); // call function
 
 
-require 'Model/Product.php';
 require 'Model/DatabaseLoader.php';
-require 'Model/Group.php';
+require 'Model/Product.php';
 require 'Model/ProductLoader.php';
+require 'Model/Group.php';
+require 'Model/GroupLoader.php';
+require 'Model/User.php';
 require 'Model/UserLoader.php';
 
-
-//include all your model files here
-require 'Model/User.php';
 //include all your controllers here
 require 'Controller/HomepageController.php';
 require 'Controller/InfoController.php';
+
+$user = new UserLoader();
+var_dump($user->getCustomers());
 
 //you could write a simple IF here based on some $_GET or $_POST vars, to choose your controller
 //this file should never be more than 20 lines of code!

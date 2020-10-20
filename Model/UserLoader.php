@@ -17,7 +17,7 @@ class UserLoader extends DatabaseLoader
         $loader = new GroupLoader();
         foreach ($customers as $customer) {
             $this->group = $loader->getGroups()[(int)$customer['group_id']];
-            $this->customers[$customer['id']] = new Customer((int)$customer['id'], $customer['firstname'], $customer['lastname'],  (int)$customer['fixed_discount'], (int)$customer['variable_discount'], $this->group);
+            $this->customers[$customer['id']] = new User((int)$customer['id'], $customer['firstname'], $customer['lastname'],  (int)$customer['fixed_discount'], (int)$customer['variable_discount'], $this->group);
         }
     }
 
