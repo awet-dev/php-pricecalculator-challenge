@@ -10,11 +10,11 @@ private array $products = [];
      */
     public function __construct(array $products){
         //$this->products = $products;
-        
+
         $pdo = $this->openConnection();
         $getProducts= $pdo->prepare('SELECT * FROM product');
         $getProducts->execute();
-        $customers = $getProducts->fetchAll();
+        $products = $getProducts->fetchAll();
         //pass group as object Group with group_id of Customer to attach relevant groups to Customer
         //$loader = new GroupLoader();
         foreach ($products as $product) {
