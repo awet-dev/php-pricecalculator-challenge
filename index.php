@@ -26,6 +26,7 @@ whatIsHappening(); // call function
 
 require 'Model/Product.php';
 require 'Model/DatabaseLoader.php';
+require 'Model/Group.php';
 
 
 //include all your model files here
