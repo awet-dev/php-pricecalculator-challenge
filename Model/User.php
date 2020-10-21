@@ -97,7 +97,7 @@ class User
        }
        $this->getGroups();
        foreach ($this->groups as $group) {
-           if ($group['fixed_discount']) {
+           if ($group['fixed_discount'] !== null) {
                array_push($arrayFixed, $group['fixed_discount']);
            }
        }
@@ -118,5 +118,12 @@ class User
     }
 
 
+    public function calculatePrice (Product $product) {
+        $price = $product->getPrice();
+        $fixedDiscount = array_sum($this->variableDiscountArray());
+        $varDiscount = max($this->getVarDiscount());
+        $totalDiscount = $fixedDiscount + ($price * $varDiscount)/100;
+        return ($price - $totalDiscount);
+    }
 
 }
