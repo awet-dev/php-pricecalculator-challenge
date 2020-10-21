@@ -89,7 +89,33 @@ class User
         }
     }
 
+    //make array of variable discounts of the groups with recursive function to get data out of tree
+    public function variableDiscountArray($arrayFixed = []): array
+    {
+       if ($this->getFixDiscount()) {
+           array_push($arrayFixed, $this->getFixDiscount());
+       }
+       $this->getGroups();
+       foreach ($this->groups as $group) {
+           if ($group['fixed_discount']) {
+               array_push($arrayFixed, $group['fixed_discount']);
+           }
+       }
+       return $arrayFixed;
+    }
 
+    public function getVarDiscount($arrayVar = [] ) {
+        if ($this->getVariableDiscount()) {
+            array_push($arrayVar, $this->getVariableDiscount());
+        }
+        $this->getGroups();
+        foreach ($this->groups as $group) {
+            if ($group['variable_discount']) {
+                array_push($arrayVar, $group['variable_discount']);
+            }
+        }
+        return $arrayVar;
+    }
 
 
 
