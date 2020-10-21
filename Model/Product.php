@@ -7,33 +7,44 @@ class Product
     private string $name;
     private int $price;
 
-    //koen advised to use type hinting
-    //alt insert to create constructor
-
     /**
      * Product constructor.
-     * @param $id
-     * @param $name
-     * @param $price
+     * @param int $id
+     * @param string $name
+     * @param int $price
      */
-    public function __construct(int $id, string $name, int $price) {
+    public function __construct(int $id, string $name, int $price)
+    {
         $this->id = $id;
         $this->name = $name;
         $this->price = $price;
     }
 
-    //created public methods to access private variables 
-
-    public function getId() : int {
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
         return $this->id;
     }
 
-    public function getName() : string {
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
         return $this->name;
     }
 
-    public function getPrice() : int {
+    /**
+     * @return int
+     */
+    public function getPrice(): int
+    {
         return $this->price;
     }
+
+
+
 
 }
