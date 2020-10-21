@@ -11,6 +11,11 @@ class HomepageController
         $customers = $fetchCustomers->getCustomers();
         $fetchProducts = new ProductLoader();
         $products = $fetchProducts->getProducts();
+        var_dump($_POST);
+
+//    if(isset($_POST[$customers->getfirstName])) {
+//
+//    }
 
         require 'View/homepage.php';
     }

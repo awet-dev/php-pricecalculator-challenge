@@ -9,6 +9,7 @@ class User
     private int $groupId;
     private int $fixDiscount;
     private int $variableDiscount;
+    private array $groups;
 
     /**
      * User constructor.
@@ -18,7 +19,7 @@ class User
      * @param int $groupId
      * @param int $fixDiscount
      * @param int $variableDiscount
-     */
+     **/
     public function __construct(int $id, string $firstName, string $lastName, int $groupId, int $fixDiscount, int $variableDiscount)
     {
         $this->id = $id;
@@ -76,6 +77,18 @@ class User
     {
         return $this->variableDiscount;
     }
+
+    public function getGroups() {
+        $group = new GroupLoader();
+        $allGroup = $group->getGroups(); // this returns all the groups
+        $customerGroup = $allGroup[$this->getGroupId()]; // group for the customer
+        array_push($this->groups, $customerGroup); // push it to the group array
+        while ($customerGroup['parent_id']) {
+            $customerGroup = $allGroup[$customerGroup['parent_id']];
+            array_push($this->groups, $customerGroup); // push it to the group array
+        }
+    }
+
 
 
 

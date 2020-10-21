@@ -65,8 +65,5 @@ class Group {
         return $this->varDiscount;
     }
 
-
-
-
 }
 

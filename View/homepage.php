@@ -18,13 +18,13 @@
 </header>
 
 
-<form method = "get">
+<form method = "POST">
 
     <div class="dropdown">
 
         <select name="customer" id="customer">
             <?php foreach ($customers as $customer): ?>
-                <option value="<?php echo $customer->getGroupId(); ?>"> <?php echo $customer->getfirstName();
+                <option name="<?php echo $customer->getfirstName()?>" value="<?php echo $customer->getfirstName(); ?>"> <?php echo $customer->getfirstName();
                     echo " ", $customer->getLastName() ?></option>
             <?php endforeach; ?>
         </select>
@@ -41,6 +41,7 @@
         </select>
 
     </div>
+    <input type="submit" value="order">
 
 </form>
 

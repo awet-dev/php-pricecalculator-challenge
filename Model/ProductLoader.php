@@ -6,10 +6,9 @@ private array $products = [];
 
     /**
      * ProductLoader constructor.
-     * @param array $products
      */
-    public function __construct(){
-
+    public function __construct()
+    {
         $pdo = $this->openConnection();
         $getProducts= $pdo->prepare('SELECT * FROM product');
         $getProducts->execute();
@@ -17,8 +16,8 @@ private array $products = [];
         foreach ($products as $product) {
             $this->products[$product['id']] = new Product((int)$product['id'], $product['name'], (int)$product['price']);
         }
-
     }
+
 
     public function getProducts(): array
     {
