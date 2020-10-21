@@ -6,8 +6,11 @@ class HomepageController
     //render function with both $_GET and $_POST vars available if it would be needed.
     public function render(array $GET, array $POST)
     {
-        //this is just example code, you can remove the line below
-       // $user = new User(1,'Alline','Baillargeon',2,21, 'becode');
+        //get customers & products to display in select menu
+        $fetchCustomers = new UserLoader();
+        $customers = $fetchCustomers->getCustomers();
+        $fetchProducts = new ProductLoader();
+        $products = $fetchProducts->getProducts();
 
 
         //you should not echo anything inside your controller - only assign vars here

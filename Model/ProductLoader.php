@@ -17,15 +17,15 @@ private array $products = [];
         $getProducts->execute();
         $products = $getProducts->fetchAll();
         //pass group as object Group with group_id of Customer to attach relevant groups to Customer
-        //$loader = new GroupLoader();
+        $loader = new GroupLoader();
         foreach ($products as $product) {
-            //$this->products = $loader->getGroups()[(int)$products['group_id']];
+            $this->products = $loader->getGroups()[(int)$products['group_id']];
             $this->products[$product['id']] = new Product((int)$product['id'], $product['name'], (int)$product['price']);
         }
 
     }
 
-    public function getProduct(): array
+    public function getProducts(): array
     {
         return $this->products;
     }
