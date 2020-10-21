@@ -17,11 +17,11 @@
     <h1>Welcome to my site</h1>
 </header>
 
-<section>
-
-    <?php var_dump($customers);?>
-
-</section>
+<select name="name" id="name">
+    <?php foreach ($customers as $customer):?>
+        <option value="<?php echo $customer->getGroupId();?>"> <?php echo $customer->getfirstName(); echo " ", $customer->getLastName()?></option>
+    <?php endforeach;?>
+</select>
 
 <footer>
     &copy; Awet and Victoria <?php echo date('Y')?>
