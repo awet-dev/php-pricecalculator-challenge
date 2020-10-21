@@ -17,14 +17,39 @@
     <h1>Welcome to my site</h1>
 </header>
 
-<select name="name" id="name">
-    <?php foreach ($customers as $customer):?>
-        <option value="<?php echo $customer->getGroupId();?>"> <?php echo $customer->getfirstName(); echo " ", $customer->getLastName()?></option>
-    <?php endforeach;?>
-</select>
+
+<form method = "get">
+
+    <div class="dropdown">
+
+        <select name="customer" id="customer">
+            <?php foreach ($customers as $customer): ?>
+                <option value="<?php echo $customer->getGroupId(); ?>"> <?php echo $customer->getfirstName();
+                    echo " ", $customer->getLastName() ?></option>
+            <?php endforeach; ?>
+        </select>
+
+    </div>
+
+    <div class="dropdown">
+
+        <select name="product" id="name">
+            <?php foreach ($products as $product): ?>
+                <option value="<?php echo $product->getId(); ?>"> <?php echo $product->getName();
+                    echo " ", $product->getPrice() ?></option>
+            <?php endforeach; ?>
+        </select>
+
+    </div>
+
+</form>
+
+
+
+
 
 <footer>
-    &copy; Awet and Victoria <?php echo date('Y')?>
+    &copy; Awet & Victoria <?php echo date('Y')?>
 </footer>
 
 <!-- Optional JavaScript -->
