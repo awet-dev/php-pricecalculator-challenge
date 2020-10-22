@@ -1,68 +1,56 @@
 <?php
+declare(strict_types=1);
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
 class Group {
 
     private int $id;
     private string $groupName;
-    private int $parentId;
     private int $fixDiscount;
     private int $varDiscount;
+    private int $parent_id;
+    //will contain the parent Group instance or null
+    private ?Group $parentGroup; //check if group exists
 
-    /**
-     * Group constructor.
-     * @param int $id
-     * @param string $groupName
-     * @param int $parentId
-     * @param int $fixDiscount
-     * @param int $varDiscount
-     */
-    public function __construct(int $id, string $groupName, int $parentId, int $fixDiscount, int $varDiscount)
+    public function __construct(int $id, string $groupName, int $fixDiscount, int $varDiscount, int $parent_id, GroupLoader $groupLoader)
+    //pass Grouploader in the Group for nesting parents of the group
     {
         $this->id = $id;
         $this->groupName = $groupName;
-        $this->parentId = $parentId;
         $this->fixDiscount = $fixDiscount;
         $this->varDiscount = $varDiscount;
+        $this->parent_id = $parent_id;
+
+        $groups = $groupLoader->getGroups();
+        //if has parent_id then get the parent Group, else assign null
+        $this->parentGroup = ($parent_id !== 0) ? $groups[$parent_id] : null;
+
     }
 
-    /**
-     * @return int
-     */
-    public function getId(): int
-    {
+    public function getId(): int {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
-    public function getGroupName(): string
-    {
+    public function getGroupName(): string {
         return $this->groupName;
     }
 
-    /**
-     * @return int
-     */
-    public function getParentId(): int
-    {
-        return $this->parentId;
-    }
-
-    /**
-     * @return int
-     */
-    public function getFixDiscount(): int
-    {
+    public function getFixDiscount(): int {
         return $this->fixDiscount;
     }
 
-    /**
-     * @return int
-     */
-    public function getVarDiscount(): int
-    {
+    public function getVarDiscount(): int {
         return $this->varDiscount;
+    }
+
+    public function getParentId(): int {
+        return $this->parent_id;
+    }
+
+    public function getParentGroup() {
+        return $this->parentGroup;
     }
 
 }
