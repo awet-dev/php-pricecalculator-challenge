@@ -90,7 +90,7 @@ class User
         $fixGroup = array_sum($this->fixedDiscountArray($this->getGroup())) * 100;
         //Multiply by 100 in order to change discounts to cents
 
-        $varGroup = ($price * (max($this->variableDiscountArray($this->getGroup()))/100));
+        $varGroup = max($this->variableDiscountArray($this->getGroup()))/100;
         //case of variable discounts look for highest discount of all the groups the user has.
 
         //Look which discount (fixed or variable) will give the customer the most value.
@@ -106,8 +106,26 @@ class User
         $varCustomer = $this->getVarDiscount() / 100; //make percentage 
 
 
-
-
+        if (isset($resultGroupFix)) {
+            if ($fixCustomer !== 0) {
+                $price = $price - $resultGroupFix - $fixCustomer;
+            } else {
+                $price = $price - $resultGroupFix - $price*$varCustomer;
+            }
+        } elseif (isset($resultGroupVar)) {
+            if ($fixCustomer !== 0) {
+                $price = $price - $fixCustomer - $price*$resultGroupVar;
+            } else {
+                $price = $price - $price*(max($resultGroupVar, $varCustomer))/100;
+            }
+            // Format and round the price for the view
+            $price = round($price / 100, 2);
+            // Price cannot be lower than 0
+            if ($price < 0) {
+                $price = 0;
+            }
+        }
+        return $price;
     }
 
 }
