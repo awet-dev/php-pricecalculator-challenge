@@ -53,5 +53,25 @@ class User
         return $this->group;
     }
 
+    // looping over group to get their variable discount
+    public function variableDiscountArray($group, $arrayVar = []): array {
+        array_push($arrayVar, $group->getVarDiscount());
+        if ($group->getParentGroup() !== NULL) {
+            $arrayVar = $this->variableDiscountArray($group->getParentGroup(), $arrayVar);
+        }
+        return $arrayVar;
+    }
+
+    // looping over group to get their fixed discount
+    public function fixedDiscountArray($group,$arrayFix = []): array {
+        array_push($arrayFix, $group->getFixDiscount());
+        if ($group->getParentGroup() !== NULL) {
+            $arrayFix = $this->fixedDiscountArray($group->getParentGroup(), $arrayFix);
+        }
+        return $arrayFix;
+    }
+
+
+
 
 }
