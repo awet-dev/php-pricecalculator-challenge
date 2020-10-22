@@ -9,7 +9,7 @@ class User
     private int $groupId;
     private int $fixDiscount;
     private int $variableDiscount;
-    private array $groups;
+    private array $groups = [];
 
     /**
      * User constructor.
@@ -85,7 +85,7 @@ class User
         array_push($this->groups, $customerGroup); // push it to the group array
         while ($customerGroup['parent_id']) {
             $customerGroup = $allGroup[$customerGroup['parent_id']];
-            array_push($this->groups, $customerGroup); // push it to the group array
+            array_push($groups, $customerGroup); // push it to the group array
         }
     }
 
@@ -117,13 +117,11 @@ class User
         return $arrayVar;
     }
 
-
     public function calculatePrice (Product $product) {
         $price = $product->getPrice();
         $fixedDiscount = array_sum($this->variableDiscountArray());
         $varDiscount = max($this->getVarDiscount());
-        $totalDiscount = $fixedDiscount + ($price * $varDiscount)/100;
-        return ($price - $totalDiscount);
+        return $fixedDiscount + ($price * $varDiscount)/100;
     }
 
 }

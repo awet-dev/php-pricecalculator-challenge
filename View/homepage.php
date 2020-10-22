@@ -5,7 +5,6 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -17,15 +16,13 @@
     <h1>Welcome to my site</h1>
 </header>
 
-
 <form method = "POST">
 
     <div class="dropdown">
 
         <select name="customer" id="customer">
             <?php foreach ($customers as $customer): ?>
-                <option name="<?php echo $customer->getfirstName()?>" value="<?php echo $customer->getfirstName(); ?>"> <?php echo $customer->getfirstName();
-                    echo " ", $customer->getLastName() ?></option>
+                <option name="customer" value="<?php echo $customer->getId()?>"><?php echo $customer->getFirstName()." ".$customer->getLastName()?></option>
             <?php endforeach; ?>
         </select>
 
@@ -35,8 +32,7 @@
 
         <select name="product" id="name">
             <?php foreach ($products as $product): ?>
-                <option value="<?php echo $product->getId(); ?>"> <?php echo $product->getName();
-                    echo " ", $product->getPrice() ?></option>
+                <option name="product" value="<?php echo $product->getId()?>"><?php echo $product->getName()?></option>
             <?php endforeach; ?>
         </select>
 
@@ -45,9 +41,9 @@
 
 </form>
 
-
-
-
+<section class="m-3">
+    <?= $order ?>
+</section>
 
 <footer>
     &copy; Awet & Victoria <?php echo date('Y')?>
