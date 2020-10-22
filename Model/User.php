@@ -6,76 +6,51 @@ class User
     private int $id;
     private string $firstName;
     private string $lastName;
-    private int $groupId;
     private int $fixDiscount;
-    private int $variableDiscount;
-    private array $groups = [];
+    private int $varDiscount;
+    private Group $group;
 
-    /**
-     * User constructor.
-     * @param int $id
-     * @param string $firstName
-     * @param string $lastName
-     * @param int $groupId
-     * @param int $fixDiscount
-     * @param int $variableDiscount
-     **/
-    public function __construct(int $id, string $firstName, string $lastName, int $groupId, int $fixDiscount, int $variableDiscount)
+    public function __construct(int $id, string $firstName, string $lastName, int $fixDiscount, int $varDiscount, Group $group)
     {
         $this->id = $id;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
-        $this->groupId = $groupId;
         $this->fixDiscount = $fixDiscount;
-        $this->variableDiscount = $variableDiscount;
+        $this->varDiscount = $varDiscount;
+        $this->group = $group;
     }
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getFirstName(): string
     {
         return $this->firstName;
     }
 
-    /**
-     * @return string
-     */
+
     public function getLastName(): string
     {
         return $this->lastName;
     }
 
-    /**
-     * @return int
-     */
-    public function getGroupId(): int
-    {
-        return $this->groupId;
-    }
 
-    /**
-     * @return int
-     */
     public function getFixDiscount(): int
     {
         return $this->fixDiscount;
     }
 
-    /**
-     * @return int
-     */
-    public function getVariableDiscount(): int
+
+    public function getVarDiscount(): int
     {
-        return $this->variableDiscount;
+        return $this->varDiscount;
+    }
+
+    public function getGroup(): Group
+    {
+        return $this->group;
     }
 
     // get all the group that belong to this customer
@@ -105,7 +80,7 @@ class User
        return $arrayFixed;
     }
 
-    public function getVarDiscount($arrayVar = [] ) {
+    public function getVarsDiscount($arrayVar = [] ) {
         if ($this->getVariableDiscount()) {
             array_push($arrayVar, $this->getVariableDiscount());
         }
