@@ -78,15 +78,16 @@ class User
         return $this->variableDiscount;
     }
 
+    // get all the group that belong to this customer
     public function getGroups() {
         $group = new GroupLoader();
-        $allGroup = $group->getGroups(); // this returns all the groups
-        $customerGroup = $allGroup[$this->getGroupId()]; // group for the customer
+        $customerGroup = $group->getGroups($this->getGroupId()); // return all the groups
+        var_dump($customerGroup); // for test
         array_push($this->groups, $customerGroup); // push it to the group array
-        while ($customerGroup['parent_id']) {
-            $customerGroup = $allGroup[$customerGroup['parent_id']];
-            array_push($groups, $customerGroup); // push it to the group array
-        }
+       while ($this->groups[count($this->groups)-1]->getParentId() !== NULL) { // is the group in this->group has a parent group
+            $customerGroup = $group->getGroups('parent_id');
+            array_push($this->groups, $customerGroup); // push it to the group array
+       }
     }
 
     //make array of variable discounts of the groups with recursive function to get data out of tree

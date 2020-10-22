@@ -16,9 +16,11 @@ class GroupLoader extends DatabaseLoader
         }
     }
 
-    public function getGroups(): array
+    public function getGroups($index): object
     {
-        return $this->groups;
+//        $this->groups = json_decode(json_encode($this->groups), true);
+        return  $this->groups[$index];
+
     }
 
 
