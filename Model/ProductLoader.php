@@ -2,7 +2,7 @@
 
 class ProductLoader extends DatabaseLoader {
 
-private array $products = [];
+    private array $products;
 
     /**
      * ProductLoader constructor.

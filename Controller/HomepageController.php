@@ -12,18 +12,20 @@ class HomepageController
         $fetchProducts = new ProductLoader();
         $products = $fetchProducts->getProducts();
 
-        if (isset($_POST['customer'], $_POST['product'])) {
-            $customer = $customers[$_POST['customer']];
-            $product = $products[$_POST['product']];
+        // When the user submits the homepage form the if below executes
+        if (isset($_GET['product'], $_GET['customer'])) {
+            // Variables for the homepage view
+            $customer = $customers[(int)$_GET['customer']];
+            $product = $products[(int)$_GET['product']];
+            $productPrice = $product->getPrice() / 100;
+            $productName = $product->getName();
             $firstName = $customer->getFirstName();
             $lastName = $customer->getLastName();
-            $price = $product->getPrice()/100;
-            $name = $product->getName();
-            $totalDiscount = $customer->calculatePrice($product);
-            $endPrice = $price - $totalDiscount;
+            $endPrice = $customer->calculatePrice($product);
+            $discount = $productPrice - $endPrice;
 
-            //message for customer to see his/her order
-            $order = '<h5>Hello '.$firstName.' '.$lastName.',<br><br> Your order: '.$name.' for '.$price.' &euro;.<br>Your discount: '.$totalDiscount.' &euro;.<br>Price to pay: '.$endPrice.' &euro;</h5>';
+            // Order details information
+            $order = '<h5>Hello ' . $firstName . ' ' . $lastName . ',<br><br> Your order: ' . $productName . ' for ' . $productPrice . ' &euro;.<br>Your discount: ' . $discount . ' &euro;.<br>Price to pay: ' . $endPrice . ' &euro;</h5>';
         } else {
             $order = '';
         }
