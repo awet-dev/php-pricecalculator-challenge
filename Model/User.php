@@ -103,7 +103,7 @@ class User
         // Get the discount of the customer
 
         $fixCustomer = $this->getFixDiscount() * 100; //change to cents
-        $varCustomer = $this->getVarDiscount() / 100; //make percentage 
+        $varCustomer = $this->getVarDiscount() / 100; //make percentage
 
 
 
