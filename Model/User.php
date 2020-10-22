@@ -71,7 +71,43 @@ class User
         return $arrayFix;
     }
 
+    /*
+    To calculate the price:
+    For the customer group: In case of variable discounts look for highest discount of all the groups the user has.
+    If some groups have fixed discounts, count them all up.
+    Look which discount (fixed or variable) will give the customer the most value.
+    Now look at the discount of the customer.
+    In case both customer and customer group have a percentage, take the largest percentage.
+    First subtract fixed amounts, then percentages!
+    A price can never be negative.
+    */
 
 
+    public function calculatePrice(Product $product): float {
+
+        $price = $product->getPrice();
+        // If some groups have fixed discounts, count them all up.
+        $fixGroup = array_sum($this->fixedDiscountArray($this->getGroup())) * 100;
+        //Multiply by 100 in order to change discounts to cents
+
+        $varGroup = ($price * (max($this->variableDiscountArray($this->getGroup()))/100));
+        //case of variable discounts look for highest discount of all the groups the user has.
+
+        //Look which discount (fixed or variable) will give the customer the most value.
+        if($varGroup > $fixGroup){
+            $resultGroupVar = $varGroup;
+        } else{
+            $resultGroupFix = $fixGroup;
+        }
+
+        // Get the discount of the customer
+
+        $fixCustomer = $this->getFixDiscount() * 100; //change to cents
+        $varCustomer = $this->getVarDiscount() / 100; //make percentage 
+
+
+
+
+    }
 
 }
