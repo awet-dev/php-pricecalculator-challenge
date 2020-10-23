@@ -41,14 +41,18 @@ require 'includes/header.php'?>
             <table>
                 <tr>
                     <th style="border: gray 1px solid">FixCustomer</th>
-                    <th style="border: gray 1px solid">VarCustomer</th>
-                    <th style="border: gray 1px solid">ResultGroupFix</th>
-                    <th style="border: gray 1px solid">ResultGroupVar</th>
+                    <td style="border: gray 1px solid"><?php echo ($tableData['fixCustomer']/100)." Euro"?></td>
                 </tr>
                 <tr>
-                    <td style="border: gray 1px solid"><?php echo ($tableData['fixCustomer']/100)." Euro"?></td>
+                    <th style="border: gray 1px solid">VarCustomer</th>
                     <td style="border: gray 1px solid"><?php echo ($tableData['varCustomer']/100)." Euro"?></td>
+                </tr>
+                <tr>
+                    <th style="border: gray 1px solid">ResultGroupFix</th>
                     <td style="border: gray 1px solid"><?php echo ($tableData['resultGroupFix']/100)." Euro"?></td>
+                </tr>
+                <tr>
+                    <th style="border: gray 1px solid">ResultGroupVar</th>
                     <td style="border: gray 1px solid"><?php echo ($tableData['resultGroupVar']/100)." Euro"?></td>
                 </tr>
             </table>
