@@ -37,6 +37,22 @@ require 'includes/header.php'?>
         <section class="m-3">
             <?= $order ?>
         </section>
+        <?php if (isset($tableData)) : ?>
+            <table>
+                <tr>
+                    <th style="border: gray 1px solid">FixCustomer</th>
+                    <th style="border: gray 1px solid">VarCustomer</th>
+                    <th style="border: gray 1px solid">ResultGroupFix</th>
+                    <th style="border: gray 1px solid">ResultGroupVar</th>
+                </tr>
+                <tr>
+                    <td style="border: gray 1px solid"><?php echo ($tableData['fixCustomer']/100)." Euro"?></td>
+                    <td style="border: gray 1px solid"><?php echo ($tableData['varCustomer']/100)." Euro"?></td>
+                    <td style="border: gray 1px solid"><?php echo ($tableData['resultGroupFix']/100)." Euro"?></td>
+                    <td style="border: gray 1px solid"><?php echo ($tableData['resultGroupVar']/100)." Euro"?></td>
+                </tr>
+            </table>
+        <?php endif;?>
     </article>
 
 <?php require 'includes/footer.php'?>

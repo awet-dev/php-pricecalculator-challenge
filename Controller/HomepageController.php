@@ -24,7 +24,6 @@ class HomepageController
             $endPrice = $customer->calculatePrice($product);
             $discount = $productPrice - $endPrice;
             $tableData = $customer->getArrayData();
-            var_dump($tableData);
             // Order details information
             $order = '<h5>Hello ' . $firstName . ' ' . $lastName . ',<br><br> Your order: ' . $productName . ' for ' . $productPrice . ' &euro;.<br>Your discount: ' . $discount . ' &euro;.<br>Price to pay: ' . $endPrice . ' &euro;</h5>';
         } else {

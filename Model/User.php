@@ -62,7 +62,6 @@ class User
         return $this->arrayData;
     }
 
-
     // looping over group to get their variable discount
     public function variableDiscountArray($group, $arrayVar = []): array {
         array_push($arrayVar, $group->getVarDiscount());

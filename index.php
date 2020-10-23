@@ -21,5 +21,9 @@ require 'Controller/HomepageController.php';
 $controller = new HomepageController();
 $controller->render();
 
+if(isset($_GET['page']) && $_GET['page'] === 'info') {
+
+}
+
 
 
