@@ -12,7 +12,7 @@ require 'includes/header.php'?>
         <!-- Select customer & product -->
         <section class="row m-3">
 
-            <div class="card center-block m-auto mt-5">
+            <div class="card center-block ml-auto mr-auto mt-5">
 
                 <form method="POST">
                     <div id="dropdown">
