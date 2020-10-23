@@ -56,19 +56,19 @@ require 'includes/header.php'?>
 
                     <?php if (isset($tableData)) : ?>
                         <table>
-                            <tr>
+                            <tr style="line-height: 30px">
                                 <th style="border: gray 1px solid">FixCustomer</th>
                                 <td style="border: gray 1px solid"><?php echo ($tableData['fixCustomer']/100)." Euro"?></td>
                             </tr>
-                            <tr>
+                            <tr style="line-height: 30px">
                                 <th style="border: gray 1px solid">VarCustomer</th>
                                 <td style="border: gray 1px solid"><?php echo ($tableData['varCustomer']/100)." Euro"?></td>
                             </tr>
-                            <tr>
+                            <tr style="line-height: 30px">
                                 <th style="border: gray 1px solid">ResultGroupFix</th>
                                 <td style="border: gray 1px solid"><?php echo ($tableData['resultGroupFix']/100)." Euro"?></td>
                             </tr>
-                            <tr>
+                            <tr style="line-height: 30px">
                                 <th style="border: gray 1px solid">ResultGroupVar</th>
                                 <td style="border: gray 1px solid"><?php echo ($tableData['resultGroupVar']/100)." Euro"?></td>
                             </tr>
