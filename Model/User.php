@@ -91,7 +91,6 @@ class User
     A price can never be negative.
     */
 
-
     public function calculatePrice(Product $product): float {
 
         $price = $product->getPrice();
