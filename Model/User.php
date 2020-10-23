@@ -9,6 +9,7 @@ class User
     private int $fixDiscount;
     private int $varDiscount;
     private Group $group;
+    private array $arrayData = [];
 
     public function __construct(int $id, string $firstName, string $lastName, int $fixDiscount, int $varDiscount, Group $group)
     {
@@ -53,19 +54,28 @@ class User
         return $this->group;
     }
 
+    private function getTableData( $fixCustomer, $varCustomer, $resultGroupFix, $resultGroupVar, $price) {
+        $this->arrayData = array('fixCustomer' => $fixCustomer, 'varCustomer' => $varCustomer, 'resultGroupFix' => $resultGroupFix, 'resultGroupVar' => $resultGroupVar, 'price' => $price);
+    }
+
+    public function getArrayData() : array {
+        return $this->arrayData;
+    }
+
+
     // looping over group to get their variable discount
     public function variableDiscountArray($group, $arrayVar = []): array {
         array_push($arrayVar, $group->getVarDiscount());
-        if ($group->getParentGroup() !== NULL) {
+        if ($group->getParentGroup() !== null) {
             $arrayVar = $this->variableDiscountArray($group->getParentGroup(), $arrayVar);
         }
         return $arrayVar;
     }
 
     // looping over group to get their fixed discount
-    public function fixedDiscountArray($group,$arrayFix = []): array {
+    public function fixedDiscountArray($group, $arrayFix = []): array {
         array_push($arrayFix, $group->getFixDiscount());
-        if ($group->getParentGroup() !== NULL) {
+        if ($group->getParentGroup() !== null) {
             $arrayFix = $this->fixedDiscountArray($group->getParentGroup(), $arrayFix);
         }
         return $arrayFix;
@@ -88,10 +98,9 @@ class User
         $price = $product->getPrice();
         // If some groups have fixed discounts, count them all up.
         $fixGroup = array_sum($this->fixedDiscountArray($this->getGroup()));
-        //Multiply by 100 in order to change discounts to cents
 
-        $varGroup = $price*(max($this->variableDiscountArray($this->getGroup()))/100);
         //case of variable discounts look for highest discount of all the groups the user has.
+        $varGroup = $price*(max($this->variableDiscountArray($this->getGroup()))/100);
 
         //Look which discount (fixed or variable) will give the customer the most value.
         if($varGroup > $fixGroup){
@@ -102,21 +111,25 @@ class User
 
         // Get the discount of the customer
 
-        $fixCustomer = $this->getFixDiscount(); //change to cents
+        $fixCustomer = $this->getFixDiscount();
         $varCustomer = $price*$this->getVarDiscount() / 100; //make percentage
 
 
         if (isset($resultGroupFix)) {
             if ($fixCustomer !== 0) {
                 $price = $price - $resultGroupFix - $fixCustomer;
+                $this->getTableData($fixCustomer, 0, $resultGroupFix, 0, $price);
             } else {
                 $price = $price - $resultGroupFix - $varCustomer;
+                $this->getTableData(0, $varCustomer, $resultGroupFix,0, $price);
             }
         } elseif (isset($resultGroupVar)) {
             if ($fixCustomer !== 0) {
                 $price = $price - $fixCustomer - $resultGroupVar;
+                $this->getTableData($fixCustomer, 0, 0, $resultGroupVar, $price);
             } else {
                 $price = $price -$varCustomer -$resultGroupVar;
+                $this->getTableData(0, $varCustomer, 0, $resultGroupVar, $price);
             }
             // Format and round the price for the view
             $price = round($price / 100, 2);

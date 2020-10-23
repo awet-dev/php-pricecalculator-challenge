@@ -11,7 +11,7 @@ require 'includes/header.php'?>
     <article>
         <!-- Select customer & product -->
         <section class="m-3">
-            <form method="get">
+            <form method="POST">
                 <div id="dropdown">
                     <select class="mb-1" name="customer">
                         <option value="0">Customer</option>
