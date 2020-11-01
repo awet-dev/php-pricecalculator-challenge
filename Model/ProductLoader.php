@@ -1,36 +1,23 @@
 <?php
 
-class ProductLoader extends DatabaseLoader {
 
+class ProductLoader extends Connection
+{
     private array $products;
 
-    /**
-     * ProductLoader constructor.
-     */
-    public function __construct()
-    {
+
+    public function loadProduct() :void {
         $pdo = $this->openConnection();
-        $getProducts= $pdo->prepare('SELECT * FROM product');
-        $getProducts->execute();
-        $products = $getProducts->fetchAll();
+        $statement = $pdo->prepare('SELECT * FROM product');
+        $statement->execute();
+        $products = $statement->fetchAll();
         foreach ($products as $product) {
-            $this->products[$product['id']] = new Product((int)$product['id'], $product['name'], (int)$product['price']);
+            $this->products[$product['id']] = new Product((string)$product['name'], (string)$product['price']);
         }
     }
 
-
-    public function getProducts(): array
-    {
+    public function getProducts(): array {
+        $this->loadProduct();
         return $this->products;
     }
-
 }
-
-/*
-$pdo = openConnection();
-$handle = $pdo->prepare('SELECT some_field FROM some_table where id = :id');
-$handle->bindValue(':id', 5);
-$handle->execute();
-$rows = $handle->fetchAll();
-echo htmlspecialchars($rows[0]['some_field']);
-*/
