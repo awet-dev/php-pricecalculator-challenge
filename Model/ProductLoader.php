@@ -12,7 +12,7 @@ class ProductLoader extends Connection
         $statement->execute();
         $products = $statement->fetchAll();
         foreach ($products as $product) {
-            $this->products[$product['id']] = new Product((string)$product['name'], (string)$product['price']);
+            $this->products[$product['id']] = new Product((int)$product['id'], (string)$product['name'], (string)$product['price']);
         }
     }
 

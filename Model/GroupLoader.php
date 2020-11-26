@@ -12,9 +12,7 @@ class GroupLoader extends Connection
         $statement->execute();
         $groups = $statement->fetchAll();
         foreach ($groups as $group) {
-            if ($group['parent_id'] !== null) {
-                $this->groups[$group['id']] = new Group((int)$group['id'], (string)$group['name'], (int)$group['parent_id'], (int)$group['fixed_discount'], (int)$group['variable_discount']);
-            }
+            $this->groups[$group['id']] = new Group((int)$group['id'], (string)$group['name'], (int)$group['parent_id'], (int)$group['fixed_discount'], (int)$group['variable_discount']);
         }
     }
 

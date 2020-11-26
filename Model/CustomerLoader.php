@@ -15,7 +15,7 @@ class CustomerLoader extends Connection
         $loader = new GroupLoader();
         foreach ($customers as $customer) {
             $group = $loader->getGroups()[$customer['group_id']];
-            $this->customers[$customer['id']] = new Customer((string)$customer['firstname'], (string)$customer['lastname'], (int)$customer['fixed_discount'], (int)$customer['variable_discount'], $group);
+            $this->customers[$customer['id']] = new Customer((int)$customer['id'], (string)$customer['firstname'], (string)$customer['lastname'], (int)$customer['fixed_discount'], (int)$customer['variable_discount'], $group);
         }
     }
 
