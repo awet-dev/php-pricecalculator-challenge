@@ -47,36 +47,61 @@
     </select>
     <input type="submit" value="Check">
 </form>
-<table class="table table-bordered">
-    <thead>
-    <tr>
-        <th scope="col">First Name</th>
-        <th scope="col">Last Name</th>
-        <th scope="col">Product</th>
-        <th scope="col">Price</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <th scope="row"><?php echo isset($data)? var_dump($data): ""?></th>
-        <th scope="row"><?php echo isset($customer)? $customer->getFirstName(): ""?></th>
-        <th scope="row"><?php echo isset($customer)? $customer->getFirstName(): ""?></th>
-        <th scope="row"><?php echo isset($customer)? $customer->getFirstName(): ""?></th>
-        <th scope="row"><?php echo isset($customer)? $customer->getFirstName(): ""?></th>
-    </tr>
-    <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-    </tr>
-    <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-    </tr>
-    </tbody>
-</table>
+
+<?php if (isset($myCustomer) && isset($myProduct) && isset($data)):?>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Product</th>
+            <th scope="col">Price</th>
+            <th scope="col">Discount</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row"><?php echo $myCustomer->getFirstName()?></th>
+            <th scope="row"><?php echo $myCustomer->getLastName()?></th>
+            <th scope="row"><?php echo $myProduct->getName()?></th>
+            <th scope="row"><?php echo ($myProduct->getPrice()/100)." €"?></th>
+            <th scope="row"><?php echo (($myProduct->getPrice()-$data[0]['finalPrice'])/100)." €"?></th>
+        </tr>
+        <tr>
+            <td colspan="5" class="text-center"><h2>Discounts</h2></td>
+        </tr>
+        <tr>
+            <td scope="row">Final Price</td>
+            <td scope="row">Variable Group Detail</td>
+            <td scope="row">Fix Group Detail</td>
+            <td scope="row" colspan="2">Customer Discount Detail</td>
+        </tr>
+        <tr>
+            <th scope="row"><?php echo ($data[0]['finalPrice']/100)." €"?></th>
+            <th scope='row'>
+                <?php if ($data[0]['varGroup'] !== []): ?>
+                    <?php foreach ($data[0]['varGroup'] as $varGroup): ?>
+                        <li><?php echo "VarGroup :".$varGroup->getName()?></li>
+                        <li><?php echo "Var Discount(%) :".$varGroup->getVarDiscount()?></li>
+                    <?php endforeach;?>
+                <?php endif;?>
+            </th>
+            <th scope='row'>
+                <?php if ($data[0]['fixGroup'] !== []): ?>
+                    <?php foreach ($data[0]['fixGroup'] as $fixGroup): ?>
+                        <li><?php echo "FixGroup :".$fixGroup->getName()?></li>
+                        <li><?php echo "Fix Discount :".($fixGroup->getFixDiscount()/100)." €"?></li>
+                    <?php endforeach;?>
+                <?php endif;?>
+            </th>
+            <th scope="row" colspan="2">
+                <li><?php echo $data[0]['customer']->getFixDiscount()." €"?></li>
+                <li><?php echo $data[0]['customer']->getVarDiscount()." %"?></li>
+            </th>
+        </tr>
+        </tbody>
+    </table>
+<?php endif;?>
 
 </body>
 </html>

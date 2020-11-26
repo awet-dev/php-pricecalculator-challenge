@@ -10,10 +10,10 @@ class HomepageController
         $products = $proLoader->getProducts();
 
         if (isset($_POST['customer']) && isset($_POST['product'])) {
-            $customer = $customers[$_POST['customer']];
-            $product = $products[$_POST['product']];
+            $myCustomer = $customers[$_POST['customer']];
+            $myProduct = $products[$_POST['product']];
 
-            $data = $customer->customerDiscount($product);
+            $data = $myCustomer->customerDiscount($myProduct);
         }
 
         require 'View/homePage.php';
